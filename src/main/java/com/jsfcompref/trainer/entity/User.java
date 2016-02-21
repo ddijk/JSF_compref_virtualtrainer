@@ -255,7 +255,7 @@ public class User extends AbstractEntity implements Serializable {
 		return getFirstName() + " " + getLastName();
 	}
 
-	//@UseridUniquenessConstraint
+	@UseridUniquenessConstraint
 	public String getUserid() {
 		return userid;
 	}

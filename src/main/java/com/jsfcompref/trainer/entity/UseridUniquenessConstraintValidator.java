@@ -5,21 +5,20 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 public class UseridUniquenessConstraintValidator implements
-        ConstraintValidator<UseridUniquenessConstraint, String> {
+	ConstraintValidator<UseridUniquenessConstraint, String> {
 
-    public boolean isValid(String value, ConstraintValidatorContext ctx) {
+	public boolean isValid(String value, ConstraintValidatorContext ctx) {
 
+		UserRegistry registry = UserRegistry.getCurrentInstance();
+		boolean result = true;
 
-        UserRegistry registry = UserRegistry.getCurrentInstance();
-        boolean result = true;
+		if (null != registry) {
+			result = (null == registry.getUserByUserid(value));
+		}
+		return result;
+	}
 
-        if (null != registry) {
-            result = (null != registry.getUserByUserid(value));
-        }
-        return result;
-    }
+	public void initialize(UseridUniquenessConstraint arg0) {
+	}
 
-    public void initialize(UseridUniquenessConstraint arg0) {
-    }
-    
 }
